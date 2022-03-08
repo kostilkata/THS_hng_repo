@@ -1,0 +1,47 @@
+#
+# mail
+#
+
+[DEFAULT]
+destemail = admins@telehouse.solutions
+mta = sendmail
+action = %(action_mwl)s
+
+#
+# SSH servers
+#
+
+[sshd]
+enabled = true
+
+# To use more aggressive sshd modes set filter parameter "mode" in jail.local:
+# normal (default), ddos, extra or aggressive (combines all).
+# See "tests/files/logs/sshd" or "filter.d/sshd.conf" for usage example and details.
+#mode   = normal
+
+port = ssh
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+ignoreip = 127.0.0.1/8 ::1 78.128.73.8 78.128.73.166
+bantime = 300
+findtime = 60
+maxretry = 3
+banaction = nftables-multiport
+chain = input
+mode = aggressive
+
+#
+# Manages the fail2ban history for hosts repeatedly banned by Fail2Ban and bans them
+# according to the settings defined
+#
+
+[recidive]
+enabled = true
+logpath = /var/log/fail2ban.log
+banaction = nftables-allports
+bantime = 1w
+findtime = 2d
+maxretry = 3
+protocol = 0-255
+ignoreip = 127.0.0.1/8 ::1 78.128.73.8 78.128.73.166
+
