@@ -95,7 +95,7 @@ Unattended-Upgrade::Package-Blacklist {
 // have a working mail setup on your system. A package that provides
 // 'mailx' must be installed. E.g. "user@example.com"
 //Unattended-Upgrade::Mail "";
-Unattended-Upgrade::Mail "admins@telehouse.solutions";
+Unattended-Upgrade::Mail "user@example.com";
 
 // Set this value to one of:
 //    "always", "only-on-error" or "on-change"
